@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PolizaAPI.DA;
+using PolizaSI.Contratos;
 
 namespace PolizaAPI.Controllers
 {
@@ -13,93 +13,82 @@ namespace PolizaAPI.Controllers
     [ApiController]
     public class PolizasController : ControllerBase
     {
-        private readonly Repositorio _context;
+        private readonly IPoliza _servicio;
 
-        public PolizasController(Repositorio context)
+        public PolizasController(IPoliza servicio)
         {
-            _context = context;
+            _servicio = servicio;
         }
 
         // GET: api/Polizas
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Poliza>>> GetPolizas()
+        //[Route("/ObtengaPolizas")]
+        [HttpGet("/ObtengaPolizas")]
+        public IEnumerable<PolizaDA.Modelos.Poliza> ObtengaPolizas()
         {
-            return await _context.Polizas.ToListAsync();
+            return _servicio.ObtengaPolizas();
         }
 
         // GET: api/Polizas/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Poliza>> GetPoliza(int id)
+        //[Route("/ObtengaPoliza/{id}")]
+        [HttpGet("/ObtengaPoliza/{id}")]
+        public PolizaDA.Modelos.Poliza ObtengaPolizaPorId(int id)
         {
-            var poliza = await _context.Polizas.FindAsync(id);
+            var poliza = _servicio.ObtengaPolizaPorId(id);
 
             if (poliza == null)
             {
-                return NotFound();
+                return null;
             }
 
             return poliza;
-        }
-
-        // PUT: api/Polizas/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPoliza(int id, Poliza poliza)
-        {
-            if (id != poliza.IdPoliza)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(poliza).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PolizaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
         // POST: api/Polizas
-        [HttpPost]
-        public async Task<ActionResult<Poliza>> PostPoliza(Poliza poliza)
+        [HttpPost("/AgreguePoliza/{id}")]
+        public void AgreguePoliza(PolizaDA.Modelos.Poliza poliza)
         {
-            _context.Polizas.Add(poliza);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPoliza", new { id = poliza.IdPoliza }, poliza);
+            try
+            {
+                _servicio.AgrueguePoliza(poliza);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
         }
 
-        // DELETE: api/Polizas/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Poliza>> DeletePoliza(int id)
+        // PUT: api/Polizas/5
+        [HttpPut("/EditePoliza/{id}")]
+        public bool EditePoliza(PolizaDA.Modelos.Poliza poliza)
         {
-            var poliza = await _context.Polizas.FindAsync(id);
-            if (poliza == null)
+            try
             {
-                return NotFound();
+                _servicio.EditePoliza(poliza);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;                
             }
 
-            _context.Polizas.Remove(poliza);
-            await _context.SaveChangesAsync();
-
-            return poliza;
+            return true;
         }
 
-        private bool PolizaExists(int id)
+
+        // DELETE: api/Polizas/5
+        [HttpDelete("/EliminePoliza/{id}")]
+        public bool EliminePoliza(int id)
         {
-            return _context.Polizas.Any(e => e.IdPoliza == id);
+            try
+            {
+                _servicio.EliminePoliza(id);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return true;
         }
+
     }
 }

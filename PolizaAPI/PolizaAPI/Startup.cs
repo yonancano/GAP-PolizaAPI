@@ -11,8 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using PolizaAPI.DA;
 using Microsoft.OpenApi.Models;
+
 
 namespace PolizaAPI
 {
@@ -35,8 +35,15 @@ namespace PolizaAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pólizas API", Version = "v1" });
             });
 
-            services.AddDbContext<Repositorio>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
+            services.AddDbContext<PolizaDA.Contexto>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b => b.MigrationsAssembly("PolizaAPI")));
+
+
+            services.AddScoped(typeof(PolizaDA.IRepositorio), typeof(PolizaDA.Repositorio));
+
+            services.AddTransient<PolizaSI.Contratos.IPoliza, PolizaSI.Servicios.Poliza>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

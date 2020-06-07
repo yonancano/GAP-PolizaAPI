@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PolizaAPI.DA
+namespace PolizaDA.Modelos
 {
     public class Cliente
     {            

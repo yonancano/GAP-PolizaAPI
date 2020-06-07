@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PolizaAPI.DA;
+using PolizaDA;
 
 namespace PolizaAPI.Migrations
 {
-    [DbContext(typeof(Repositorio))]
-    partial class RepositorioModelSnapshot : ModelSnapshot
+    [DbContext(typeof(Contexto))]
+    [Migration("20200607200541_PolizaDA.ContextoSeed")]
+    partial class PolizaDAContextoSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,7 +20,7 @@ namespace PolizaAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PolizaAPI.DA.Cliente", b =>
+            modelBuilder.Entity("PolizaDA.Modelos.Cliente", b =>
                 {
                     b.Property<int>("IdCliente")
                         .ValueGeneratedOnAdd()
@@ -50,7 +52,7 @@ namespace PolizaAPI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PolizaAPI.DA.Poliza", b =>
+            modelBuilder.Entity("PolizaDA.Modelos.Poliza", b =>
                 {
                     b.Property<int>("IdPoliza")
                         .ValueGeneratedOnAdd()
@@ -58,15 +60,20 @@ namespace PolizaAPI.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdCliente")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("PeriodoCobertura")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("PorcentajeCobertura")
                         .HasColumnType("tinyint");
 
                     b.Property<decimal>("Precio")
@@ -92,6 +99,7 @@ namespace PolizaAPI.Migrations
                             IdCliente = 1,
                             Nombre = "Poliza 001",
                             PeriodoCobertura = (byte)10,
+                            PorcentajeCobertura = (byte)15,
                             Precio = 900000m,
                             TipoCubrimiento = (byte)1,
                             TipoRiesgo = (byte)1
@@ -103,15 +111,28 @@ namespace PolizaAPI.Migrations
                             IdCliente = 2,
                             Nombre = "Poliza 002",
                             PeriodoCobertura = (byte)10,
+                            PorcentajeCobertura = (byte)82,
                             Precio = 1500000m,
                             TipoCubrimiento = (byte)2,
                             TipoRiesgo = (byte)2
+                        },
+                        new
+                        {
+                            IdPoliza = 3,
+                            Descripcion = "Permite la cobertura del cliente: John Doe en caso relacionado con un Robo",
+                            IdCliente = 2,
+                            Nombre = "Poliza 003",
+                            PeriodoCobertura = (byte)6,
+                            PorcentajeCobertura = (byte)50,
+                            Precio = 3250000m,
+                            TipoCubrimiento = (byte)3,
+                            TipoRiesgo = (byte)4
                         });
                 });
 
-            modelBuilder.Entity("PolizaAPI.DA.Poliza", b =>
+            modelBuilder.Entity("PolizaDA.Modelos.Poliza", b =>
                 {
-                    b.HasOne("PolizaAPI.DA.Cliente", "Cliente")
+                    b.HasOne("PolizaDA.Modelos.Cliente", "Cliente")
                         .WithMany("MisPolizas")
                         .HasForeignKey("IdCliente")
                         .OnDelete(DeleteBehavior.Cascade)

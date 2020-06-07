@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PolizaAPI.Enumerados
+namespace PolizaDA.Enumerados
 {
     public enum TiposCubrimiento
     {

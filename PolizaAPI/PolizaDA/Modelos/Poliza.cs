@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PolizaAPI.DA
+namespace PolizaDA.Modelos
 {
     public class Poliza
     {            
@@ -19,9 +19,10 @@ namespace PolizaAPI.DA
 
         public byte TipoCubrimiento { get; set; }
 
+        public byte PorcentajeCobertura { get; set; }
+
         public DateTime InicioVigencia => DateTime.Now;
 
-        //definido en meses
         public byte PeriodoCobertura { get; set; }
 
         public decimal Precio { get; set; }

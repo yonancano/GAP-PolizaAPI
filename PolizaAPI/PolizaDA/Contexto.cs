@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PolizaAPI.Enumerados;
+using PolizaDA.Enumerados;
+using PolizaDA.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PolizaAPI.DA
+namespace PolizaDA
 {
-    public class Repositorio : DbContext
+    public class Contexto : DbContext
     {
-        public Repositorio(DbContextOptions options) : base(options) { }
+        public Contexto(DbContextOptions options) : base(options) { }
 
         //migrations se hicieron en la consola PM
         //seeding 
@@ -38,6 +39,7 @@ namespace PolizaAPI.DA
                     Descripcion = "Permite la cobertura del cliente: Yonan Cano en caso relacionado con un Terremoto",
                     Precio = 900000,
                     TipoCubrimiento = (byte)TiposCubrimiento.Terremoto,
+                    PorcentajeCobertura = 15,
                     TipoRiesgo = (byte)TiposRiesgo.Bajo,
                     PeriodoCobertura = 10,
                     IdCliente = 1
@@ -49,8 +51,20 @@ namespace PolizaAPI.DA
                     Descripcion = "Permite la cobertura del cliente: Lorena Muñoz en caso relacionado con un Incendio",
                     Precio = 1500000,
                     TipoCubrimiento = (byte)TiposCubrimiento.Incendio,
+                    PorcentajeCobertura = 82,
                     TipoRiesgo = (byte)TiposRiesgo.Medio,
                     PeriodoCobertura = 10,
+                    IdCliente = 2
+                }, new Poliza
+                {
+                    IdPoliza = 3,
+                    Nombre = "Poliza 003",
+                    Descripcion = "Permite la cobertura del cliente: John Doe en caso relacionado con un Robo",
+                    Precio = 3250000,
+                    TipoCubrimiento = (byte)TiposCubrimiento.Robo,
+                    PorcentajeCobertura = 50,
+                    TipoRiesgo = (byte)TiposRiesgo.Alto,
+                    PeriodoCobertura = 6,
                     IdCliente = 2
                 });
 
