@@ -28,6 +28,7 @@ namespace PolizaAPI.DA
 
         public byte TipoRiesgo { get; set; }
 
+
         [ForeignKey(nameof(Cliente))]
         public int IdCliente { get; set; }
         public Cliente Cliente { get; set; }
