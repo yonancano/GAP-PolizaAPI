@@ -10,7 +10,7 @@ namespace PolizaSI.Contratos
     {
         IEnumerable<Poliza> ObtengaPolizas();
         Poliza ObtengaPolizaPorId(int id);
-        bool AgrueguePoliza(Poliza poliza);
+        bool AgreguePoliza(Poliza poliza);
         bool EditePoliza(Poliza poliza);
         bool EliminePoliza(int id);
     }

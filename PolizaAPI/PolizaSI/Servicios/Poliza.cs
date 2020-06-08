@@ -26,8 +26,9 @@ namespace PolizaSI.Servicios
             return _repositorio.ObtengaPolizaPorId(id);
         }
 
-        public bool AgrueguePoliza(PolizaDA.Modelos.Poliza poliza)
+        public bool AgreguePoliza(PolizaDA.Modelos.Poliza poliza)
         {
+            poliza.InicioVigencia = DateTime.Now;
             return _repositorio.AgreguePoliza(poliza);
         }
 

@@ -20,16 +20,12 @@ namespace PolizaAPI.Controllers
             _servicio = servicio;
         }
 
-        // GET: api/Polizas
-        //[Route("/ObtengaPolizas")]
         [HttpGet("/ObtengaPolizas")]
         public IEnumerable<PolizaDA.Modelos.Poliza> ObtengaPolizas()
         {
             return _servicio.ObtengaPolizas();
         }
 
-        // GET: api/Polizas/5
-        //[Route("/ObtengaPoliza/{id}")]
         [HttpGet("/ObtengaPoliza/{id}")]
         public PolizaDA.Modelos.Poliza ObtengaPolizaPorId(int id)
         {
@@ -43,23 +39,21 @@ namespace PolizaAPI.Controllers
             return poliza;
         }
 
-        // POST: api/Polizas
-        [HttpPost("/AgreguePoliza/{id}")]
-        public void AgreguePoliza(PolizaDA.Modelos.Poliza poliza)
+        [HttpPost("/AgreguePoliza")]
+        public void AgreguePoliza([FromBody]PolizaDA.Modelos.Poliza poliza)
         {
             try
             {
-                _servicio.AgrueguePoliza(poliza);
+                _servicio.AgreguePoliza(poliza);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateException)
             {
-                throw;
+                throw new NotImplementedException("No se completo la acción Agregar.");
             }
         }
 
-        // PUT: api/Polizas/5
-        [HttpPut("/EditePoliza/{id}")]
-        public bool EditePoliza(PolizaDA.Modelos.Poliza poliza)
+        [HttpPut("/EditePoliza")]
+        public bool EditePoliza([FromBody] PolizaDA.Modelos.Poliza poliza)
         {
             try
             {
@@ -67,14 +61,12 @@ namespace PolizaAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                throw;                
+                throw new NotImplementedException("No se completo la acción Editar.");
             }
 
             return true;
         }
 
-
-        // DELETE: api/Polizas/5
         [HttpDelete("/EliminePoliza/{id}")]
         public bool EliminePoliza(int id)
         {
@@ -82,9 +74,9 @@ namespace PolizaAPI.Controllers
             {
                 _servicio.EliminePoliza(id);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateException)
             {
-                throw;
+                throw new NotImplementedException("No se completo la acción Eliminar.");
             }
 
             return true;

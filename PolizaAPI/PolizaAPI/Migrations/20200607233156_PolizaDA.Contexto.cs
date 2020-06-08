@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PolizaAPI.Migrations
 {
@@ -26,10 +27,11 @@ namespace PolizaAPI.Migrations
                 {
                     IdPoliza = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: false),
-                    Descripcion = table.Column<string>(nullable: false),
+                    Nombre = table.Column<string>(nullable: true),
+                    Descripcion = table.Column<string>(nullable: true),
                     TipoCubrimiento = table.Column<byte>(nullable: false),
                     PorcentajeCobertura = table.Column<byte>(nullable: false),
+                    InicioVigencia = table.Column<DateTime>(nullable: false),
                     PeriodoCobertura = table.Column<byte>(nullable: false),
                     Precio = table.Column<decimal>(nullable: false),
                     TipoRiesgo = table.Column<byte>(nullable: false),
@@ -58,18 +60,18 @@ namespace PolizaAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Polizas",
-                columns: new[] { "IdPoliza", "Descripcion", "IdCliente", "Nombre", "PeriodoCobertura", "PorcentajeCobertura", "Precio", "TipoCubrimiento", "TipoRiesgo" },
-                values: new object[] { 1, "Permite la cobertura del cliente: Yonan Cano en caso relacionado con un Terremoto", 1, "Poliza 001", (byte)10, (byte)15, 900000m, (byte)1, (byte)1 });
+                columns: new[] { "IdPoliza", "Descripcion", "IdCliente", "InicioVigencia", "Nombre", "PeriodoCobertura", "PorcentajeCobertura", "Precio", "TipoCubrimiento", "TipoRiesgo" },
+                values: new object[] { 1, "Permite la cobertura del cliente: Yonan Cano en caso relacionado con un Terremoto", 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poliza 001", (byte)10, (byte)15, 900000m, (byte)1, (byte)1 });
 
             migrationBuilder.InsertData(
                 table: "Polizas",
-                columns: new[] { "IdPoliza", "Descripcion", "IdCliente", "Nombre", "PeriodoCobertura", "PorcentajeCobertura", "Precio", "TipoCubrimiento", "TipoRiesgo" },
-                values: new object[] { 2, "Permite la cobertura del cliente: Lorena Muñoz en caso relacionado con un Incendio", 2, "Poliza 002", (byte)10, (byte)82, 1500000m, (byte)2, (byte)2 });
+                columns: new[] { "IdPoliza", "Descripcion", "IdCliente", "InicioVigencia", "Nombre", "PeriodoCobertura", "PorcentajeCobertura", "Precio", "TipoCubrimiento", "TipoRiesgo" },
+                values: new object[] { 2, "Permite la cobertura del cliente: Lorena Muñoz en caso relacionado con un Incendio", 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poliza 002", (byte)10, (byte)82, 1500000m, (byte)2, (byte)2 });
 
             migrationBuilder.InsertData(
                 table: "Polizas",
-                columns: new[] { "IdPoliza", "Descripcion", "IdCliente", "Nombre", "PeriodoCobertura", "PorcentajeCobertura", "Precio", "TipoCubrimiento", "TipoRiesgo" },
-                values: new object[] { 3, "Permite la cobertura del cliente: John Doe en caso relacionado con un Robo", 2, "Poliza 003", (byte)6, (byte)50, 3250000m, (byte)3, (byte)4 });
+                columns: new[] { "IdPoliza", "Descripcion", "IdCliente", "InicioVigencia", "Nombre", "PeriodoCobertura", "PorcentajeCobertura", "Precio", "TipoCubrimiento", "TipoRiesgo" },
+                values: new object[] { 3, "Permite la cobertura del cliente: John Doe en caso relacionado con un Robo", 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poliza 003", (byte)6, (byte)50, 3250000m, (byte)3, (byte)4 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Polizas_IdCliente",

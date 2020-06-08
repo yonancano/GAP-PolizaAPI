@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PolizaDA.Modelos
 {
     public class Poliza
-    {            
+    {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdPoliza { get; set; }
@@ -21,7 +21,7 @@ namespace PolizaDA.Modelos
 
         public byte PorcentajeCobertura { get; set; }
 
-        public DateTime InicioVigencia => DateTime.Now;
+        public DateTime InicioVigencia { get; set; }
 
         public byte PeriodoCobertura { get; set; }
 
