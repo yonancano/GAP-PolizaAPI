@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore.Internal;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using NSubstitute.ReceivedExtensions;
-using Poliza.SI.Contratos;
+using Poliza.BW;
+using Poliza.DA;
+using PolizaAPI.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,38 +15,34 @@ namespace Poliza.API_Test
 {
     public class AgreguePolizaTest
     {
-        private readonly IPoliza _servicio;
+        private readonly IRepositorio _repositorio;
+        private readonly IReglasPoliza _reglas;
+        
+        private PolizasController _polizasController;
 
         public AgreguePolizaTest() 
         {
-            _servicio = Substitute.For<IPoliza>();
+            _repositorio = Substitute.For<IRepositorio>();
+            _reglas = Substitute.For<IReglasPoliza>();
+
+            _polizasController = new PolizasController(_repositorio, _reglas);
         }
 
-        //ToDo Received
         [Fact]
         public void AgreguePoliza()
         {
-            _servicio.ReceivedWithAnyArgs().AgreguePoliza(Arg.Any<Poliza.Model.Poliza>());
-            _servicio.AgreguePoliza(new Poliza.Model.Poliza());
+            _reglas.Validar(Arg.Any<Poliza.Model.Poliza>()).ReturnsForAnyArgs(true);
+            _repositorio.AgreguePoliza(Arg.Any<Poliza.Model.Poliza>());
+
+            _polizasController.AgreguePoliza(Escenarios.Obtenga1Poliza().Single());
         }
 
-        [Fact]
-        public void AgreguePoliza_Error_SinCliente()
-        {
-            _servicio.AgreguePoliza(new Model.Poliza()).ThrowsForAnyArgs(new DbUpdateException());
-
-            Assert.Throws<DbUpdateException>(() => _servicio.AgreguePoliza(new Model.Poliza()));
-        }
-
-        //ToDo0000000000000000000
         [Fact]
         public void AgreguePoliza_Regla_RiesgoAlto()
         {
-            //_servicio.AgreguePoliza(new Poliza()).ThrowsForAnyArgs(new PolizaException());
-
-            //Assert.Throws<DbUpdateException>(() => _servicio.AgreguePoliza(new Poliza()));
-            Assert.Equal("El porcentaje de cubrimiento no puede ser superior al 50%", "");
+            _reglas.Validar(Arg.Any<Poliza.Model.Poliza>()).ThrowsForAnyArgs(new Exception());          
+                
+            Assert.Throws<NotImplementedException>(() => _polizasController.AgreguePoliza(Escenarios.ObtengaRiesgoAlto_PorcentajeAlto()));
         }
-
     }
 }

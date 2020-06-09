@@ -9,13 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.DA", "PolizaDA\Poliz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.Api-Test", "PolizaAPI-Test\Poliza.Api-Test.csproj", "{E23E750D-B214-44E5-82C4-D2556413161E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poliza.BW", "PolizaBW\Poliza.BW.csproj", "{12C28785-824D-462D-89EE-751423D10B1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.BW", "PolizaBW\Poliza.BW.csproj", "{12C28785-824D-462D-89EE-751423D10B1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poliza.BW-Test", "PolizaBW-Test\Poliza.BW-Test.csproj", "{BCA597C6-6C0B-4E1A-9749-4851A5110167}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.BW-Test", "PolizaBW-Test\Poliza.BW-Test.csproj", "{BCA597C6-6C0B-4E1A-9749-4851A5110167}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poliza.Model", "Poliza.Model\Poliza.Model.csproj", "{A02ACBA9-2BE7-4828-A5AB-956CF5E1C818}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.SI", "PolizaSI\Poliza.SI.csproj", "{10F812B2-2009-4E22-8A9C-AE8236CACD45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.Model", "Poliza.Model\Poliza.Model.csproj", "{A02ACBA9-2BE7-4828-A5AB-956CF5E1C818}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		{A02ACBA9-2BE7-4828-A5AB-956CF5E1C818}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A02ACBA9-2BE7-4828-A5AB-956CF5E1C818}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A02ACBA9-2BE7-4828-A5AB-956CF5E1C818}.Release|Any CPU.Build.0 = Release|Any CPU
-		{10F812B2-2009-4E22-8A9C-AE8236CACD45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{10F812B2-2009-4E22-8A9C-AE8236CACD45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{10F812B2-2009-4E22-8A9C-AE8236CACD45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{10F812B2-2009-4E22-8A9C-AE8236CACD45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

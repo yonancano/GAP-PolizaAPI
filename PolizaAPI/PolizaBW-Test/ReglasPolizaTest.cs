@@ -1,14 +1,55 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
+using Poliza.BW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Xunit;
 
-namespace Poliza.API_Test
+namespace Poliza.BW_Test
 {
-    internal static class Escenarios
+    public class ReglasPolizaTest
     {
-        public static List<Model.Poliza> EscenarioPolizas = new List<Model.Poliza>
+
+        private ReglasPoliza _reglas = new ReglasPoliza();    
+
+        [Fact]
+        public void Validar_RiesgoBajo()
+        {
+
+            var resp = _reglas.Validar(EscenarioPolizas.Single(x => x.TipoRiesgo == (byte)Model.Enumerados.TiposRiesgo.Bajo));
+            
+            Assert.True(resp);
+        }
+
+        [Fact]
+        public void Validar_RiesgoAlto_PorcentajeBajo()
+        {
+
+            var resp = _reglas.Validar(EscenarioPolizas.Single(x => x.TipoRiesgo == (byte)Model.Enumerados.TiposRiesgo.Alto && x.PorcentajeCobertura < 50));
+            
+            Assert.True(resp);
+        }
+
+        [Fact]
+        public void Validar_RiesgoAlto_PorcentajeLimite()
+        {
+
+            var resp = _reglas.Validar(EscenarioPolizas.Single(x => x.TipoRiesgo == (byte)Model.Enumerados.TiposRiesgo.Alto && x.PorcentajeCobertura == 50)); 
+            
+            Assert.True(resp);
+        }
+
+        [Fact]
+        public void Validar_RiesgoAlto_PorcentajeAlto()
+        {
+
+            Assert.Throws<Exception>(() => _reglas.Validar(EscenarioPolizas.Single(x => x.TipoRiesgo == (byte)Model.Enumerados.TiposRiesgo.Alto && x.PorcentajeCobertura > 50)));
+        }
+
+
+
+
+
+        private List<Model.Poliza> EscenarioPolizas = new List<Model.Poliza>
         {
             new Model.Poliza
             {
@@ -31,7 +72,7 @@ namespace Poliza.API_Test
                 Precio = 22450000,
                 InicioVigencia = DateTime.Now,
                 TipoCubrimiento = (byte)Poliza.Model.Enumerados.TiposCubrimiento.Robo,
-                PorcentajeCobertura = 80,
+                PorcentajeCobertura = 20,
                 TipoRiesgo = (byte)Poliza.Model.Enumerados.TiposRiesgo.Alto,
                 PeriodoCobertura = 10,
                 IdCliente = 1
@@ -63,26 +104,5 @@ namespace Poliza.API_Test
                 IdCliente = 1
             }
         };
-
-        internal static IEnumerable<Poliza.Model.Poliza> Obtenga1Poliza() 
-        {
-            return EscenarioPolizas.Take(1);
-        }
-
-        internal static IEnumerable<Poliza.Model.Poliza> Obtenga3Polizas()
-        {
-            return EscenarioPolizas.Take(3);
-        }
-
-        internal static Poliza.Model.Poliza ObtengaPolizaPorId(int id)
-        {
-            return EscenarioPolizas.Find(x => x.IdCliente == id);
-        }
-
-        internal static Poliza.Model.Poliza ObtengaRiesgoAlto_PorcentajeAlto()
-        {
-            return EscenarioPolizas.Single(x => x.TipoRiesgo == (byte)Model.Enumerados.TiposRiesgo.Alto && x.PorcentajeCobertura == 50);
-        }
-
     }
 }

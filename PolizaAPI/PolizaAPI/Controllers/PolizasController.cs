@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Poliza.BW;
 using Poliza.DA;
-using Poliza.SI.Contratos;
 
 namespace PolizaAPI.Controllers
 {
@@ -14,12 +14,13 @@ namespace PolizaAPI.Controllers
     [ApiController]
     public class PolizasController : ControllerBase
     {
-        //private readonly IPoliza _servicio;
+        private readonly IReglasPoliza _reglas;
         private readonly IRepositorio _repositorio;
 
-        public PolizasController(IRepositorio repositorio)
+        public PolizasController(IRepositorio repositorio, IReglasPoliza reglas)
         {
             _repositorio = repositorio;
+            _reglas = reglas;
         }
 
         [HttpGet("/ObtengaPolizas")]
@@ -28,7 +29,7 @@ namespace PolizaAPI.Controllers
             return _repositorio.ObtengaPolizas();
         }
 
-        [HttpGet("/ObtengaPoliza/{id}")]
+        [HttpGet("/ObtengaPoliza")]
         public Poliza.Model.Poliza ObtengaPolizaPorId(int id)
         {
             var poliza = _repositorio.ObtengaPolizaPorId(id);
@@ -46,11 +47,18 @@ namespace PolizaAPI.Controllers
         {
             try
             {
-                _repositorio.AgreguePoliza(poliza);
+                if (_reglas.Validar(poliza))
+                {
+                    _repositorio.AgreguePoliza(poliza);
+                }
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
-                throw new NotImplementedException("No se completo la acción Agregar.");
+                throw new NotImplementedException("No se completo la acción Agregar.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException("No se completo la acción Agregar."+ ex.Message, ex);
             }
         }
 
@@ -59,30 +67,75 @@ namespace PolizaAPI.Controllers
         {
             try
             {
-                _repositorio.EditePoliza(poliza);
+                if (_reglas.Validar(poliza))
+                {
+                    _repositorio.EditePoliza(poliza);
+                }
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
-                throw new NotImplementedException("No se completo la acción Editar.");
+                throw new NotImplementedException("No se completo la acción Editar.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException("No se completo la acción Editar." + ex.Message, ex);
             }
 
             return true;
         }
 
-        [HttpDelete("/EliminePoliza/{id}")]
+        [HttpDelete("/EliminePoliza")]
         public bool EliminePoliza(int id)
         {
             try
             {
                 _repositorio.EliminePoliza(id);
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
-                throw new NotImplementedException("No se completo la acción Eliminar.");
+                throw new NotImplementedException("No se completo la acción Eliminar.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException("No se completo la acción Eliminar." + ex.Message, ex);
             }
 
             return true;
         }
 
+        //Se hace el comentario de que es similar al AgreguePoliza/ 
+        //Pero mejor tener caminos independientes en diferentes acciones
+        [HttpPost("/AsignePoliza")]
+        public void AsignePoliza([FromBody] Poliza.Model.Poliza poliza)
+        {
+            try
+            {
+                if (_reglas.Validar(poliza))
+                {
+                    _repositorio.EditePoliza(poliza);
+                }
+            }
+            catch (DbUpdateException)
+            {
+                throw new NotImplementedException("No se completo la acción Asignar.");
+            }
+        }
+
+        //Se hace el comentario de que es similar al EliminePoliza/ 
+        //Pero mejor tener caminos independientes en diferentes acciones
+        [HttpPut("/CancelePoliza")]
+        public bool CancelePoliza(int id)
+        {
+            try
+            {
+                _repositorio.EliminePoliza(id);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new NotImplementedException("No se completo la acción Cancelar.");
+            }
+
+            return true;
+        }
     }
 }

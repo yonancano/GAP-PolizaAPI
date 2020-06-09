@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Poliza.Model\Poliza.Model.csproj" />
     <ProjectReference Include="..\PolizaAPI\Poliza.Api.csproj" />
-    <ProjectReference Include="..\PolizaSI\Poliza.SI.csproj" />
   </ItemGroup>
 
 </Project>

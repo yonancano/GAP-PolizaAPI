@@ -42,8 +42,7 @@ namespace PolizaAPI
 
 
             services.AddScoped(typeof(Poliza.DA.IRepositorio), typeof(Poliza.DA.Repositorio));
-            services.AddScoped(typeof(Poliza.BW.IDatosPoliza), typeof(Poliza.BW.DatosPoliza));
-            services.AddScoped(typeof(Poliza.SI.Contratos.IPoliza), typeof(Poliza.SI.Servicios.Poliza));
+            services.AddScoped(typeof(Poliza.BW.IReglasPoliza), typeof(Poliza.BW.ReglasPoliza));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
