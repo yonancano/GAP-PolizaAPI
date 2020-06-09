@@ -5,51 +5,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Poliza.Api.Controllers.Base;
 using Poliza.BW;
-using Poliza.DA;
+using Poliza.EF;
+using Poliza.Repositorio;
 
 namespace PolizaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PolizasController : ControllerBase
+    public class PolizasController : BaseController<Poliza.Model.Poliza, RepositorioPoliza>
     {
         private readonly IReglasPoliza _reglas;
-        private readonly IRepositorio _repositorio;
 
-        public PolizasController(IRepositorio repositorio, IReglasPoliza reglas)
+        public PolizasController(RepositorioPoliza repositorio, IReglasPoliza reglas) : base(repositorio)
         {
-            _repositorio = repositorio;
             _reglas = reglas;
         }
 
-        [HttpGet("/ObtengaPolizas")]
-        public IEnumerable<Poliza.Model.Poliza> ObtengaPolizas()
-        {
-            return _repositorio.ObtengaPolizas();
-        }
-
-        [HttpGet("/ObtengaPoliza")]
-        public Poliza.Model.Poliza ObtengaPolizaPorId(int id)
-        {
-            var poliza = _repositorio.ObtengaPolizaPorId(id);
-
-            if (poliza == null)
-            {
-                return null;
-            }
-
-            return poliza;
-        }
-
         [HttpPost("/AgreguePoliza")]
-        public void AgreguePoliza([FromBody]Poliza.Model.Poliza poliza)
+        public void AgreguePoliza([FromBody] Poliza.Model.Poliza poliza)
         {
             try
             {
                 if (_reglas.Validar(poliza))
                 {
-                    _repositorio.AgreguePoliza(poliza);
+                    this.Repositorio.Agregue(poliza);
                 }
             }
             catch (DbUpdateException ex)
@@ -58,7 +40,7 @@ namespace PolizaAPI.Controllers
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException("No se completo la acción Agregar."+ ex.Message, ex);
+                throw new NotImplementedException("No se completo la acción Agregar." + ex.Message, ex);
             }
         }
 
@@ -69,7 +51,7 @@ namespace PolizaAPI.Controllers
             {
                 if (_reglas.Validar(poliza))
                 {
-                    _repositorio.EditePoliza(poliza);
+                    this.Repositorio.Edite(poliza);
                 }
             }
             catch (DbUpdateConcurrencyException ex)
@@ -84,27 +66,8 @@ namespace PolizaAPI.Controllers
             return true;
         }
 
-        [HttpDelete("/EliminePoliza")]
-        public bool EliminePoliza(int id)
-        {
-            try
-            {
-                _repositorio.EliminePoliza(id);
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new NotImplementedException("No se completo la acción Eliminar.", ex);
-            }
-            catch (Exception ex)
-            {
-                throw new NotImplementedException("No se completo la acción Eliminar." + ex.Message, ex);
-            }
-
-            return true;
-        }
-
-        //Se hace el comentario de que es similar al AgreguePoliza/ 
-        //Pero mejor tener caminos independientes en diferentes acciones
+        ////Se hace el comentario de que es similar al AgreguePoliza/ 
+        ////Pero mejor tener caminos independientes en diferentes acciones
         [HttpPost("/AsignePoliza")]
         public void AsignePoliza([FromBody] Poliza.Model.Poliza poliza)
         {
@@ -112,7 +75,7 @@ namespace PolizaAPI.Controllers
             {
                 if (_reglas.Validar(poliza))
                 {
-                    _repositorio.EditePoliza(poliza);
+                    this.Repositorio.Agregue(poliza);
                 }
             }
             catch (DbUpdateException)
@@ -121,14 +84,14 @@ namespace PolizaAPI.Controllers
             }
         }
 
-        //Se hace el comentario de que es similar al EliminePoliza/ 
-        //Pero mejor tener caminos independientes en diferentes acciones
-        [HttpPut("/CancelePoliza")]
-        public bool CancelePoliza(int id)
+        ////Se hace el comentario de que es similar al EliminePoliza/ 
+        ////Pero mejor tener caminos independientes en diferentes acciones
+        [HttpDelete("/CancelePoliza")]
+        public bool CancelePoliza([FromBody] Poliza.Model.Poliza poliza)
         {
             try
             {
-                _repositorio.EliminePoliza(id);
+                this.Repositorio.Elimine(poliza);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -136,6 +99,12 @@ namespace PolizaAPI.Controllers
             }
 
             return true;
+        }
+
+        [HttpGet("/ObtengaPolizasCliente")]
+        public IEnumerable<Poliza.Model.Poliza> ObtenerPolizasCliente(int id)
+        {
+            return this.Repositorio.ObtengaPolizasPorCliente(id);
         }
     }
 }

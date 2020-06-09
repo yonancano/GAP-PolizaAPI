@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.Api", "PolizaAPI\Poliza.Api.csproj", "{21A0361F-DE61-4B54-AE19-B582E54B3160}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.DA", "PolizaDA\Poliza.DA.csproj", "{795BB2DC-E0A6-4F70-9F98-A3B9094D0D72}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.Api-Test", "PolizaAPI-Test\Poliza.Api-Test.csproj", "{E23E750D-B214-44E5-82C4-D2556413161E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.Repositorio", "PolizaDA\Poliza.Repositorio.csproj", "{795BB2DC-E0A6-4F70-9F98-A3B9094D0D72}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.BW", "PolizaBW\Poliza.BW.csproj", "{12C28785-824D-462D-89EE-751423D10B1A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.BW-Test", "PolizaBW-Test\Poliza.BW-Test.csproj", "{BCA597C6-6C0B-4E1A-9749-4851A5110167}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.Model", "Poliza.Model\Poliza.Model.csproj", "{A02ACBA9-2BE7-4828-A5AB-956CF5E1C818}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poliza.EF", "Poliza.EF\Poliza.EF.csproj", "{28547261-55C4-4503-98FC-B9F30F8717B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		{795BB2DC-E0A6-4F70-9F98-A3B9094D0D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{795BB2DC-E0A6-4F70-9F98-A3B9094D0D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{795BB2DC-E0A6-4F70-9F98-A3B9094D0D72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E23E750D-B214-44E5-82C4-D2556413161E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E23E750D-B214-44E5-82C4-D2556413161E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E23E750D-B214-44E5-82C4-D2556413161E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E23E750D-B214-44E5-82C4-D2556413161E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12C28785-824D-462D-89EE-751423D10B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12C28785-824D-462D-89EE-751423D10B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12C28785-824D-462D-89EE-751423D10B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{A02ACBA9-2BE7-4828-A5AB-956CF5E1C818}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A02ACBA9-2BE7-4828-A5AB-956CF5E1C818}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A02ACBA9-2BE7-4828-A5AB-956CF5E1C818}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28547261-55C4-4503-98FC-B9F30F8717B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28547261-55C4-4503-98FC-B9F30F8717B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28547261-55C4-4503-98FC-B9F30F8717B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28547261-55C4-4503-98FC-B9F30F8717B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

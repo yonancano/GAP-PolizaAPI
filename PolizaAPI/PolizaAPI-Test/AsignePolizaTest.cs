@@ -5,7 +5,8 @@ using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using NSubstitute.ReturnsExtensions;
 using Poliza.BW;
-using Poliza.DA;
+using Poliza.EF;
+using Poliza.Repositorio;
 using PolizaAPI.Controllers;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,15 @@ namespace Poliza.API_Test
 {
     public class AsignePolizaTest
     {
-        private readonly IRepositorio _repositorio;
+        private readonly RepositorioPoliza _repositorio;
         private readonly IReglasPoliza _reglas;
 
         private PolizasController _polizasController;
 
         public AsignePolizaTest()
         {
-            _repositorio = Substitute.For<IRepositorio>();
             _reglas = Substitute.For<IReglasPoliza>();
-
+            _repositorio = Substitute.For<RepositorioPoliza>();
             _polizasController = new PolizasController(_repositorio, _reglas);
         }
 
@@ -33,9 +33,9 @@ namespace Poliza.API_Test
         public void AsignePoliza()
         {
             _reglas.Validar(Arg.Any<Poliza.Model.Poliza>()).ReturnsForAnyArgs(true);
-            _repositorio.AgreguePoliza(Arg.Any<Poliza.Model.Poliza>());
+            _repositorio.Agregue(Arg.Any<Poliza.Model.Poliza>());
 
-            _polizasController.AsignePoliza(Escenarios.Obtenga1Poliza().Single());
+            _polizasController.Agregar(Escenarios.Obtenga1Poliza().Single());
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace Poliza.API_Test
         {
             _reglas.Validar(Arg.Any<Poliza.Model.Poliza>()).ThrowsForAnyArgs(new Exception());
 
-            Assert.Throws<NotImplementedException>(() => _polizasController.AgreguePoliza(Escenarios.ObtengaRiesgoAlto_PorcentajeAlto()));
+            Assert.Throws<NotImplementedException>(() => _polizasController.Agregar(Escenarios.ObtengaRiesgoAlto_PorcentajeAlto()));
         }
     }
 }

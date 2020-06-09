@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Poliza.DA
+namespace Poliza.EF.Contexto
 {
-    public class Contexto : DbContext
+    public class ContextoApp : DbContext
     {
-        public Contexto(DbContextOptions options) : base(options) { }
+        public ContextoApp(DbContextOptions<ContextoApp> options) : base(options) { }
 
         //migrations se hicieron en la consola PM
         //seeding 
@@ -133,5 +133,11 @@ namespace Poliza.DA
 
         public DbSet<Model.Poliza> Polizas { get; set; }
         public DbSet<Model.Cliente> Clientes { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+        }
+
     }
 }

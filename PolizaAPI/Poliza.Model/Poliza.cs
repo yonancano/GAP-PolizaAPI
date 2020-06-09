@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Poliza.Model
 {
@@ -46,6 +47,7 @@ namespace Poliza.Model
         [ForeignKey(nameof(Cliente))]
         public int IdCliente { get; set; }
 
+        [JsonIgnore]
         public Cliente Cliente { get; set; }
     }
 }

@@ -12,7 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-
+using Poliza.EF.Contexto;
+using Poliza.EF;
 
 namespace PolizaAPI
 {
@@ -37,15 +38,15 @@ namespace PolizaAPI
 
 
 
-            services.AddDbContext<Poliza.DA.Contexto>(options =>
+            services.AddDbContext<ContextoApp>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Poliza.Api")));
 
-
-            services.AddScoped(typeof(Poliza.DA.IRepositorio), typeof(Poliza.DA.Repositorio));
+            services.AddScoped<RepositorioPoliza>();
+            services.AddScoped<RepositorioCliente>();
             services.AddScoped(typeof(Poliza.BW.IReglasPoliza), typeof(Poliza.BW.ReglasPoliza));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -55,13 +56,6 @@ namespace PolizaAPI
 
             app.UseHttpsRedirection();
 
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pólizas API");
-            });
-
             app.UseRouting();
 
             app.UseAuthorization();
@@ -69,6 +63,13 @@ namespace PolizaAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pólizas API");
             });
         }
     }

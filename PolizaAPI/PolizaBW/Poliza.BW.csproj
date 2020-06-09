@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Poliza.Model\Poliza.Model.csproj" />
-    <ProjectReference Include="..\PolizaDA\Poliza.DA.csproj" />
+    <ProjectReference Include="..\PolizaDA\Poliza.Repositorio.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Poliza.DA;
+using Poliza.EF.Contexto;
 
 namespace Poliza.Api.Migrations
 {
-    [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ContextoApp))]
+    partial class ContextoAppModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -128,7 +128,7 @@ namespace Poliza.Api.Migrations
                             IdPoliza = 1,
                             Descripcion = "Permite la cobertura relacionado con un Terremoto",
                             IdCliente = 1,
-                            InicioVigencia = new DateTime(2020, 6, 8, 20, 13, 7, 699, DateTimeKind.Local).AddTicks(5147),
+                            InicioVigencia = new DateTime(2020, 6, 9, 0, 37, 13, 191, DateTimeKind.Local).AddTicks(3349),
                             Nombre = "Poliza 001",
                             PeriodoCobertura = (byte)10,
                             PorcentajeCobertura = (byte)15,
@@ -141,7 +141,7 @@ namespace Poliza.Api.Migrations
                             IdPoliza = 2,
                             Descripcion = "Permite la cobertura relacionado con un Incendio",
                             IdCliente = 1,
-                            InicioVigencia = new DateTime(2020, 6, 8, 20, 13, 7, 700, DateTimeKind.Local).AddTicks(6400),
+                            InicioVigencia = new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4574),
                             Nombre = "Poliza 002",
                             PeriodoCobertura = (byte)10,
                             PorcentajeCobertura = (byte)82,
@@ -154,7 +154,7 @@ namespace Poliza.Api.Migrations
                             IdPoliza = 3,
                             Descripcion = "Permite la cobertura relacionado con un Robo",
                             IdCliente = 2,
-                            InicioVigencia = new DateTime(2020, 6, 8, 20, 13, 7, 700, DateTimeKind.Local).AddTicks(6458),
+                            InicioVigencia = new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4634),
                             Nombre = "Poliza 003",
                             PeriodoCobertura = (byte)6,
                             PorcentajeCobertura = (byte)50,
@@ -167,7 +167,7 @@ namespace Poliza.Api.Migrations
                             IdPoliza = 4,
                             Descripcion = "Permite la cobertura relacionado con un Robo",
                             IdCliente = 2,
-                            InicioVigencia = new DateTime(2020, 6, 8, 20, 13, 7, 700, DateTimeKind.Local).AddTicks(6462),
+                            InicioVigencia = new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4637),
                             Nombre = "Poliza 003",
                             PeriodoCobertura = (byte)6,
                             PorcentajeCobertura = (byte)50,
@@ -180,7 +180,7 @@ namespace Poliza.Api.Migrations
                             IdPoliza = 5,
                             Descripcion = "Permite la cobertura relacionado con una Pérdida",
                             IdCliente = 3,
-                            InicioVigencia = new DateTime(2020, 6, 8, 20, 13, 7, 700, DateTimeKind.Local).AddTicks(6464),
+                            InicioVigencia = new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4639),
                             Nombre = "Poliza 004",
                             PeriodoCobertura = (byte)4,
                             PorcentajeCobertura = (byte)56,
@@ -193,7 +193,7 @@ namespace Poliza.Api.Migrations
                             IdPoliza = 6,
                             Descripcion = "Permite la cobertura relacionado con un Robo",
                             IdCliente = 6,
-                            InicioVigencia = new DateTime(2020, 6, 8, 20, 13, 7, 700, DateTimeKind.Local).AddTicks(6465),
+                            InicioVigencia = new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4641),
                             Nombre = "Poliza 005",
                             PeriodoCobertura = (byte)10,
                             PorcentajeCobertura = (byte)66,

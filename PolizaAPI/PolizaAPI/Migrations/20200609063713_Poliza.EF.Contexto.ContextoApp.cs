@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Poliza.Api.Migrations
 {
-    public partial class PolizaDAContexto : Migration
+    public partial class PolizaEFContextoContextoApp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,12 +66,12 @@ namespace Poliza.Api.Migrations
                 columns: new[] { "IdPoliza", "Descripcion", "IdCliente", "InicioVigencia", "Nombre", "PeriodoCobertura", "PorcentajeCobertura", "Precio", "TipoCubrimiento", "TipoRiesgo" },
                 values: new object[,]
                 {
-                    { 1, "Permite la cobertura relacionado con un Terremoto", 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poliza 001", (byte)10, (byte)15, 900000m, (byte)1, (byte)1 },
-                    { 2, "Permite la cobertura relacionado con un Incendio", 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poliza 002", (byte)10, (byte)82, 1500000m, (byte)2, (byte)2 },
-                    { 3, "Permite la cobertura relacionado con un Robo", 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poliza 003", (byte)6, (byte)50, 3250000m, (byte)3, (byte)4 },
-                    { 4, "Permite la cobertura relacionado con un Robo", 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poliza 003", (byte)6, (byte)50, 3250000m, (byte)3, (byte)4 },
-                    { 5, "Permite la cobertura relacionado con una Pérdida", 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poliza 004", (byte)4, (byte)56, 12000000m, (byte)4, (byte)3 },
-                    { 6, "Permite la cobertura relacionado con un Robo", 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Poliza 005", (byte)10, (byte)66, 1350000m, (byte)3, (byte)3 }
+                    { 1, "Permite la cobertura relacionado con un Terremoto", 1, new DateTime(2020, 6, 9, 0, 37, 13, 191, DateTimeKind.Local).AddTicks(3349), "Poliza 001", (byte)10, (byte)15, 900000m, (byte)1, (byte)1 },
+                    { 2, "Permite la cobertura relacionado con un Incendio", 1, new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4574), "Poliza 002", (byte)10, (byte)82, 1500000m, (byte)2, (byte)2 },
+                    { 3, "Permite la cobertura relacionado con un Robo", 2, new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4634), "Poliza 003", (byte)6, (byte)50, 3250000m, (byte)3, (byte)4 },
+                    { 4, "Permite la cobertura relacionado con un Robo", 2, new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4637), "Poliza 003", (byte)6, (byte)50, 3250000m, (byte)3, (byte)4 },
+                    { 5, "Permite la cobertura relacionado con una Pérdida", 3, new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4639), "Poliza 004", (byte)4, (byte)56, 12000000m, (byte)4, (byte)3 },
+                    { 6, "Permite la cobertura relacionado con un Robo", 6, new DateTime(2020, 6, 9, 0, 37, 13, 192, DateTimeKind.Local).AddTicks(4641), "Poliza 005", (byte)10, (byte)66, 1350000m, (byte)3, (byte)3 }
                 });
 
             migrationBuilder.CreateIndex(

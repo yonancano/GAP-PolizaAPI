@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Poliza.DA;
+using Poliza.Api.Controllers.Base;
+using Poliza.EF;
+using Poliza.Repositorio;
+using Poliza.Repositorio.Base;
 
 namespace Poliza.Api.Controllers
 {
@@ -12,9 +15,9 @@ namespace Poliza.Api.Controllers
     [ApiController]
     public class ClientesController : Controller
     {
-        private readonly IRepositorio _repositorio;
+        private readonly IRepositorioCliente _repositorio;
 
-        public ClientesController(IRepositorio repositorio)
+        public ClientesController(RepositorioCliente repositorio)
         {
             _repositorio = repositorio;
         }
@@ -22,8 +25,9 @@ namespace Poliza.Api.Controllers
         [HttpGet("/ObtengaCliente")]
         public Poliza.Model.Cliente ObtengaClientePorId(int id)
         {
-
-            return null;
+            //se complico el llamado a EF para MisPolizas del objeto Cliente
+            //parcial: se crea un metodo adicional en polizas para las del cliente
+            return _repositorio.ObtengaPorId(id);
         }
 
     }
