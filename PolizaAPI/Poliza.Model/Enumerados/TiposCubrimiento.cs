@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PolizaDA.Enumerados
+namespace Poliza.Model.Enumerados
 {
     public enum TiposCubrimiento
     {
@@ -15,6 +15,8 @@ namespace PolizaDA.Enumerados
         [Description("Robo")]
         Robo = 3,
         [Description("Pérdida")]
-        Perdida = 4
+        Perdida = 4,
+        [Description("Inundación")]
+        Inundacion = 5
     }
 }

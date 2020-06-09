@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PolizaSI.Contratos;
+using Poliza.DA;
+using Poliza.SI.Contratos;
 
 namespace PolizaAPI.Controllers
 {
@@ -13,23 +14,24 @@ namespace PolizaAPI.Controllers
     [ApiController]
     public class PolizasController : ControllerBase
     {
-        private readonly IPoliza _servicio;
+        //private readonly IPoliza _servicio;
+        private readonly IRepositorio _repositorio;
 
-        public PolizasController(IPoliza servicio)
+        public PolizasController(IRepositorio repositorio)
         {
-            _servicio = servicio;
+            _repositorio = repositorio;
         }
 
         [HttpGet("/ObtengaPolizas")]
-        public IEnumerable<PolizaDA.Modelos.Poliza> ObtengaPolizas()
+        public IEnumerable<Poliza.Model.Poliza> ObtengaPolizas()
         {
-            return _servicio.ObtengaPolizas();
+            return _repositorio.ObtengaPolizas();
         }
 
         [HttpGet("/ObtengaPoliza/{id}")]
-        public PolizaDA.Modelos.Poliza ObtengaPolizaPorId(int id)
+        public Poliza.Model.Poliza ObtengaPolizaPorId(int id)
         {
-            var poliza = _servicio.ObtengaPolizaPorId(id);
+            var poliza = _repositorio.ObtengaPolizaPorId(id);
 
             if (poliza == null)
             {
@@ -40,11 +42,11 @@ namespace PolizaAPI.Controllers
         }
 
         [HttpPost("/AgreguePoliza")]
-        public void AgreguePoliza([FromBody]PolizaDA.Modelos.Poliza poliza)
+        public void AgreguePoliza([FromBody]Poliza.Model.Poliza poliza)
         {
             try
             {
-                _servicio.AgreguePoliza(poliza);
+                _repositorio.AgreguePoliza(poliza);
             }
             catch (DbUpdateException)
             {
@@ -53,11 +55,11 @@ namespace PolizaAPI.Controllers
         }
 
         [HttpPut("/EditePoliza")]
-        public bool EditePoliza([FromBody] PolizaDA.Modelos.Poliza poliza)
+        public bool EditePoliza([FromBody] Poliza.Model.Poliza poliza)
         {
             try
             {
-                _servicio.EditePoliza(poliza);
+                _repositorio.EditePoliza(poliza);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,7 +74,7 @@ namespace PolizaAPI.Controllers
         {
             try
             {
-                _servicio.EliminePoliza(id);
+                _repositorio.EliminePoliza(id);
             }
             catch (DbUpdateException)
             {

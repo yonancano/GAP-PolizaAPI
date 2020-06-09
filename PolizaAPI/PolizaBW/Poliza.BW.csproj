@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PolizaDA\PolizaDA.csproj" />
+    <ProjectReference Include="..\Poliza.Model\Poliza.Model.csproj" />
+    <ProjectReference Include="..\PolizaDA\Poliza.DA.csproj" />
   </ItemGroup>
 
 </Project>

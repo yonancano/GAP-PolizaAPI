@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Poliza.Model\Poliza.Model.csproj" />
+    <ProjectReference Include="..\PolizaBW\Poliza.BW.csproj" />
+    <ProjectReference Include="..\PolizaDA\Poliza.DA.csproj" />
+  </ItemGroup>
+
+</Project>

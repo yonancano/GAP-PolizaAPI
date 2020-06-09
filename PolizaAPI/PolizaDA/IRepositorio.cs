@@ -1,19 +1,19 @@
-﻿using PolizaDA.Modelos;
+﻿using Poliza.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PolizaDA
+namespace Poliza.DA
 {
     public interface IRepositorio
     {
-        IEnumerable<Poliza> ObtengaPolizas();
+        IEnumerable<Model.Poliza> ObtengaPolizas();
 
-        Poliza ObtengaPolizaPorId(int id);
+        Model.Poliza ObtengaPolizaPorId(int id);
 
-        bool AgreguePoliza(Poliza poliza);
+        bool AgreguePoliza(Model.Poliza poliza);
 
-        bool EditePoliza(Poliza poliza);
+        bool EditePoliza(Model.Poliza poliza);
 
         bool EliminePoliza(int id);
     }

@@ -1,17 +1,14 @@
-﻿using PolizaDA.Modelos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PolizaSI.Contratos
+namespace Poliza.SI.Contratos
 {
     public interface IPoliza
     {
-        IEnumerable<Poliza> ObtengaPolizas();
-        Poliza ObtengaPolizaPorId(int id);
-        bool AgreguePoliza(Poliza poliza);
-        bool EditePoliza(Poliza poliza);
-        bool EliminePoliza(int id);
+        bool AgreguePoliza(Model.Poliza poliza);
+        bool EditePoliza(Model.Poliza poliza);
+        bool AsignePoliza(Model.Poliza poliza);
     }
 }

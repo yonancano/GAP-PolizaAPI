@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PolizaDA;
+using Poliza.DA;
 
-namespace PolizaAPI.Migrations
+namespace Poliza.Api.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200607233231_PolizaDA.ContextoSeed")]
-    partial class PolizaDAContextoSeed
+    [Migration("20200609021105_Poliza.DA.Contexto")]
+    partial class PolizaDAContexto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace PolizaAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PolizaDA.Modelos.Cliente", b =>
+            modelBuilder.Entity("Poliza.Model.Cliente", b =>
                 {
                     b.Property<int>("IdCliente")
                         .ValueGeneratedOnAdd()
@@ -29,14 +29,17 @@ namespace PolizaAPI.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.HasKey("IdCliente");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Cliente");
 
                     b.HasData(
                         new
@@ -49,11 +52,35 @@ namespace PolizaAPI.Migrations
                         {
                             IdCliente = 2,
                             Email = "lorena.munoz@gmail.com",
-                            Nombre = "Lorena Muñozñoz"
+                            Nombre = "Lorena Muñoz"
+                        },
+                        new
+                        {
+                            IdCliente = 3,
+                            Email = "daniela.duran@gmail.com",
+                            Nombre = "Daniela Duran"
+                        },
+                        new
+                        {
+                            IdCliente = 4,
+                            Email = "ernesto.enado@gmail.com",
+                            Nombre = "Ernesto Enado"
+                        },
+                        new
+                        {
+                            IdCliente = 5,
+                            Email = "fiorela.flores@gmail.com",
+                            Nombre = "Fiorela Flores"
+                        },
+                        new
+                        {
+                            IdCliente = 6,
+                            Email = "gabriel.guzman@gmail.com",
+                            Nombre = "Gabriel Guzman"
                         });
                 });
 
-            modelBuilder.Entity("PolizaDA.Modelos.Poliza", b =>
+            modelBuilder.Entity("Poliza.Model.Poliza", b =>
                 {
                     b.Property<int>("IdPoliza")
                         .ValueGeneratedOnAdd()
@@ -61,7 +88,9 @@ namespace PolizaAPI.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<int>("IdCliente")
                         .HasColumnType("int");
@@ -70,7 +99,9 @@ namespace PolizaAPI.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<byte>("PeriodoCobertura")
                         .HasColumnType("tinyint");
@@ -91,13 +122,13 @@ namespace PolizaAPI.Migrations
 
                     b.HasIndex("IdCliente");
 
-                    b.ToTable("Polizas");
+                    b.ToTable("Poliza");
 
                     b.HasData(
                         new
                         {
                             IdPoliza = 1,
-                            Descripcion = "Permite la cobertura del cliente: Yonan Cano en caso relacionado con un Terremoto",
+                            Descripcion = "Permite la cobertura relacionado con un Terremoto",
                             IdCliente = 1,
                             InicioVigencia = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Poliza 001",
@@ -110,8 +141,8 @@ namespace PolizaAPI.Migrations
                         new
                         {
                             IdPoliza = 2,
-                            Descripcion = "Permite la cobertura del cliente: Lorena Muñoz en caso relacionado con un Incendio",
-                            IdCliente = 2,
+                            Descripcion = "Permite la cobertura relacionado con un Incendio",
+                            IdCliente = 1,
                             InicioVigencia = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Poliza 002",
                             PeriodoCobertura = (byte)10,
@@ -123,7 +154,7 @@ namespace PolizaAPI.Migrations
                         new
                         {
                             IdPoliza = 3,
-                            Descripcion = "Permite la cobertura del cliente: John Doe en caso relacionado con un Robo",
+                            Descripcion = "Permite la cobertura relacionado con un Robo",
                             IdCliente = 2,
                             InicioVigencia = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Poliza 003",
@@ -132,13 +163,52 @@ namespace PolizaAPI.Migrations
                             Precio = 3250000m,
                             TipoCubrimiento = (byte)3,
                             TipoRiesgo = (byte)4
+                        },
+                        new
+                        {
+                            IdPoliza = 4,
+                            Descripcion = "Permite la cobertura relacionado con un Robo",
+                            IdCliente = 2,
+                            InicioVigencia = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Poliza 003",
+                            PeriodoCobertura = (byte)6,
+                            PorcentajeCobertura = (byte)50,
+                            Precio = 3250000m,
+                            TipoCubrimiento = (byte)3,
+                            TipoRiesgo = (byte)4
+                        },
+                        new
+                        {
+                            IdPoliza = 5,
+                            Descripcion = "Permite la cobertura relacionado con una Pérdida",
+                            IdCliente = 3,
+                            InicioVigencia = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Poliza 004",
+                            PeriodoCobertura = (byte)4,
+                            PorcentajeCobertura = (byte)56,
+                            Precio = 12000000m,
+                            TipoCubrimiento = (byte)4,
+                            TipoRiesgo = (byte)3
+                        },
+                        new
+                        {
+                            IdPoliza = 6,
+                            Descripcion = "Permite la cobertura relacionado con un Robo",
+                            IdCliente = 6,
+                            InicioVigencia = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Poliza 005",
+                            PeriodoCobertura = (byte)10,
+                            PorcentajeCobertura = (byte)66,
+                            Precio = 1350000m,
+                            TipoCubrimiento = (byte)3,
+                            TipoRiesgo = (byte)3
                         });
                 });
 
-            modelBuilder.Entity("PolizaDA.Modelos.Poliza", b =>
+            modelBuilder.Entity("Poliza.Model.Poliza", b =>
                 {
-                    b.HasOne("PolizaDA.Modelos.Cliente", "Cliente")
-                        .WithMany("MisPolizas")
+                    b.HasOne("Poliza.Model.Cliente", "Cliente")
+                        .WithMany()
                         .HasForeignKey("IdCliente")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

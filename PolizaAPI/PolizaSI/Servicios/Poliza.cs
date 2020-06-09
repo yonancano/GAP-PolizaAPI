@@ -1,46 +1,39 @@
-﻿using PolizaDA;
-using PolizaSI.Contratos;
+﻿using Poliza.BW;
+using Poliza.BW.Administrar;
+using Poliza.DA;
+using Poliza.SI.Contratos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PolizaSI.Servicios
+namespace Poliza.SI.Servicios
 {
     public class Poliza : IPoliza
     {
-        private readonly IRepositorio _repositorio;
+        private readonly IDatosPoliza _datos;
 
-        public Poliza(IRepositorio repositorio)
+        public Poliza(IDatosPoliza datos)
         {
-            _repositorio = repositorio;
+            _datos = datos;
         }
 
-        public IEnumerable<PolizaDA.Modelos.Poliza> ObtengaPolizas()
+        public bool AgreguePoliza(Model.Poliza poliza)
         {
-            return _repositorio.ObtengaPolizas();
+            Administrador admin = new Administrador();
+            return admin.Agregar(null);//_datos);
         }
 
-        public PolizaDA.Modelos.Poliza ObtengaPolizaPorId(int id)
+        public bool EditePoliza(Model.Poliza poliza)
         {
-            return _repositorio.ObtengaPolizaPorId(id);
+            Administrador admin = new Administrador();
+            return admin.Editar(null);//_datos);
         }
 
-        public bool AgreguePoliza(PolizaDA.Modelos.Poliza poliza)
+        public bool AsignePoliza(Model.Poliza poliza)
         {
-            poliza.InicioVigencia = DateTime.Now;
-            return _repositorio.AgreguePoliza(poliza);
+            Administrador admin = new Administrador();
+            return admin.Editar(null);//_datos);
         }
-
-        public bool EditePoliza(PolizaDA.Modelos.Poliza poliza)
-        {
-            return _repositorio.EditePoliza(poliza);
-        }
-
-        public bool EliminePoliza(int id)
-        {
-            return _repositorio.EliminePoliza(id);
-        }
-
     }
 }

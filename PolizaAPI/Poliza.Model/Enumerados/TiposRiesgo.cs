@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PolizaDA.Enumerados
+namespace Poliza.Model.Enumerados
 {
     public enum TiposRiesgo
     {

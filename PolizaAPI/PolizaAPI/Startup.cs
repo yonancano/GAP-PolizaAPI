@@ -37,13 +37,13 @@ namespace PolizaAPI
 
 
 
-            services.AddDbContext<PolizaDA.Contexto>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b => b.MigrationsAssembly("PolizaAPI")));
+            services.AddDbContext<Poliza.DA.Contexto>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Poliza.Api")));
 
 
-            services.AddScoped(typeof(PolizaDA.IRepositorio), typeof(PolizaDA.Repositorio));
-
-            services.AddTransient<PolizaSI.Contratos.IPoliza, PolizaSI.Servicios.Poliza>();
+            services.AddScoped(typeof(Poliza.DA.IRepositorio), typeof(Poliza.DA.Repositorio));
+            services.AddScoped(typeof(Poliza.BW.IDatosPoliza), typeof(Poliza.BW.DatosPoliza));
+            services.AddScoped(typeof(Poliza.SI.Contratos.IPoliza), typeof(Poliza.SI.Servicios.Poliza));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
