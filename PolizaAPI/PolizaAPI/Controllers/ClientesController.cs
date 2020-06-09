@@ -25,7 +25,7 @@ namespace Poliza.Api.Controllers
         [HttpGet("/ObtengaCliente")]
         public Poliza.Model.Cliente ObtengaClientePorId(int id)
         {
-            //se complico el llamado a EF para MisPolizas del objeto Cliente
+            //se complico el llamado a EF para llenar MisPolizas del mismo objeto Cliente
             //parcial: se crea un metodo adicional en polizas para las del cliente
             return _repositorio.ObtengaPorId(id);
         }

@@ -43,7 +43,7 @@ namespace Poliza.Api.Controllers.Base
             Repositorio.Edite(item);
         }
 
-        [HttpDelete("/Eliminar")]
+        [HttpPost("/Eliminar")]
         public void Eliminar([FromBody] TModel item)
         {
             Repositorio.Elimine(item);

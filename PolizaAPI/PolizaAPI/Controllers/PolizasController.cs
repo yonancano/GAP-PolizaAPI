@@ -86,7 +86,7 @@ namespace PolizaAPI.Controllers
 
         ////Se hace el comentario de que es similar al EliminePoliza/ 
         ////Pero mejor tener caminos independientes en diferentes acciones
-        [HttpDelete("/CancelePoliza")]
+        [HttpPost("/CancelePoliza")]
         public bool CancelePoliza([FromBody] Poliza.Model.Poliza poliza)
         {
             try
